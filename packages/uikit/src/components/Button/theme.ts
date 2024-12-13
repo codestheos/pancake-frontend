@@ -1,4 +1,5 @@
 import { scales, variants } from "./types";
+import { vars } from "../../css/vars.css";
 
 export const scaleVariants = {
   [scales.MD]: {
@@ -19,7 +20,7 @@ export const scaleVariants = {
 export const styleVariants = {
   [variants.PRIMARY]: {
     backgroundColor: "primary",
-    color: "white",
+    color: "invertedContrast",
   },
   [variants.SECONDARY]: {
     backgroundColor: "transparent",
@@ -57,5 +58,13 @@ export const styleVariants = {
     backgroundColor: "input",
     color: "textSubtle",
     boxShadow: "none",
+  },
+  [variants.BUBBLEGUM]: {
+    background: vars.colors.gradientBubblegum,
+    color: "textSubtle",
+    boxShadow: "none",
+    ":disabled": {
+      background: vars.colors.disabled,
+    },
   },
 };

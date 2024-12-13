@@ -1,14 +1,19 @@
-import { createContext, useCallback, useEffect, useState } from 'react'
-import { Language } from '@pancakeswap/uikit'
-import { useLastUpdated } from '@pancakeswap/hooks'
+import { createContext, useCallback, useEffect, useState, useMemo } from 'react'
 import memoize from 'lodash/memoize'
+import omitBy from 'lodash/omitBy'
+import reduce from 'lodash/reduce'
 import { EN, languages } from './config/languages'
-import { ContextApi, ProviderState, TranslateFunction } from './types'
+import { ContextApi, ProviderState, TranslateFunction, Language } from './types'
 import { LS_KEY, fetchLocale, getLanguageCodeFromLS } from './helpers'
+import useLastUpdated from './hooks/useLastUpdated'
 
 const initialState: ProviderState = {
   isFetching: true,
   currentLanguage: EN,
+}
+
+function isUndefinedOrNull(value: any): boolean {
+  return value === null || value === undefined
 }
 
 const includesVariableRegex = new RegExp(/%\S+?%/, 'gm')
@@ -25,7 +30,7 @@ const getRegExpForDataKey = memoize((dataKey: string): RegExp => {
 const languageMap = new Map<Language['locale'], Record<string, string>>()
 languageMap.set(EN.locale, {})
 
-export const LanguageContext = createContext<ContextApi>(undefined)
+export const LanguageContext = createContext<ContextApi | undefined>(undefined)
 
 export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { lastUpdated, setLastUpdated: refresh } = useLastUpdated()
@@ -101,12 +106,16 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
         // Check the existence of at least one combination of %%, separated by 1 or more non space characters
         const includesVariable = translatedTextIncludesVariable(key)
         if (includesVariable) {
-          let interpolatedText = translatedText
-          Object.keys(data).forEach((dataKey) => {
-            interpolatedText = interpolatedText.replace(getRegExpForDataKey(dataKey), data[dataKey].toString())
-          })
-
-          return interpolatedText
+          return reduce(
+            omitBy(data, isUndefinedOrNull),
+            (result, dataValue, dataKey) => {
+              if (dataValue !== undefined && dataValue !== null) {
+                return result.replace(getRegExpForDataKey(dataKey), dataValue.toString())
+              }
+              return result
+            },
+            translatedText,
+          )
         }
       }
 
@@ -116,5 +125,9 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
     [currentLanguage, lastUpdated],
   )
 
-  return <LanguageContext.Provider value={{ ...state, setLanguage, t: translate }}>{children}</LanguageContext.Provider>
+  const providerValue = useMemo(() => {
+    return { ...state, setLanguage, t: translate }
+  }, [state, setLanguage, translate])
+
+  return <LanguageContext.Provider value={providerValue}>{children}</LanguageContext.Provider>
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import { renderWithProvider } from "../../testHelpers";
+import { expect, it } from "vitest";
 import { Overlay } from "../../components/Overlay";
+import { renderWithProvider } from "../../testHelpers";
 
 it("renders correctly", () => {
   const { asFragment } = renderWithProvider(<Overlay />);
@@ -12,10 +12,9 @@ it("renders correctly", () => {
       left: 0px;
       width: 100%;
       height: 100%;
-      background-color: #280D5F99;
+      background-color: var(--colors-text99);
       z-index: 20;
       will-change: opacity;
-      -webkit-animation: dHqLl 350ms ease forwards;
       animation: dHqLl 350ms ease forwards;
     }
 

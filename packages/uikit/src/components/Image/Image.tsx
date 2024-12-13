@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
 import observerOptions from "./options";
 import Wrapper from "./Wrapper";
 import { ImageProps } from "./types";
@@ -13,9 +13,10 @@ const StyledImage = styled.img`
   width: 100%;
 `;
 
-const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({ src, alt, width, height, ...props }) => {
+const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({ src, alt, width, height, fallbackSrc, ...props }) => {
   const imgRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let observer: IntersectionObserver;
@@ -44,8 +45,12 @@ const Image: React.FC<React.PropsWithChildren<ImageProps>> = ({ src, alt, width,
   }, [src]);
 
   return (
-    <Wrapper ref={imgRef} height={height} width={width} {...props}>
-      {isLoaded ? <StyledImage src={src} alt={alt} /> : <Placeholder />}
+    <Wrapper key={src} ref={imgRef} height={height} width={width} {...props}>
+      {isLoaded ? (
+        <StyledImage src={error && fallbackSrc ? fallbackSrc : src} alt={alt} onError={() => setError(true)} />
+      ) : (
+        <Placeholder />
+      )}
     </Wrapper>
   );
 };

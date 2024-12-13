@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import shouldForwardProp from "@styled-system/should-forward-prop";
+import { styled } from "styled-components";
 import { space, variant as StyledSystemVariant } from "styled-system";
-import { lightColors } from "../../theme";
 import { styleVariants, styleScales } from "./themes";
 import { ProgressProps, variants } from "./types";
+import { lightColors } from "../../tokens";
 
 interface ProgressBarProps {
   primary?: boolean;
@@ -10,14 +11,14 @@ interface ProgressBarProps {
   $background?: string;
 }
 
-export const Bar = styled.div<ProgressBarProps>`
+export const Bar = styled.div.withConfig({ shouldForwardProp })<ProgressBarProps>`
   position: absolute;
   top: 0;
   left: 0;
   background: ${({ theme, $useDark, primary, $background }) => {
     if ($background) return $background;
-    if ($useDark) return primary ? theme.colors.secondary : `${theme.colors.secondary}80`;
-    return primary ? lightColors.secondary : `${lightColors.secondary}80`;
+    if ($useDark) return primary ? theme.colors.secondary : `${theme.colors.secondary80}`;
+    return primary ? lightColors.secondary : `${lightColors.secondary80}`;
   }};
   height: 100%;
   transition: width 200ms ease;

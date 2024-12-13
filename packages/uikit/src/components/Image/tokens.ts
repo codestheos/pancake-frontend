@@ -221,7 +221,7 @@ const tokens = {
   swgb: {
     symbol: "SWGb",
     address: {
-      56: "0xe40255c5d7fa7ceec5120408c78c787cecb4cfdb",
+      56: "0xE40255C5d7fa7ceEc5120408C78C787CECB4cfdb",
       97: "",
     },
     decimals: 18,
@@ -293,7 +293,7 @@ const tokens = {
   ust: {
     symbol: "UST",
     address: {
-      56: "0x23396cf899ca06c4472205fc903bdb4de249d6fc",
+      56: "0x23396cF899Ca06c4472205fC903bDB4de249D6fC",
       97: "",
     },
     decimals: 18,
@@ -681,7 +681,7 @@ const tokens = {
     symbol: "USDC",
     address: {
       56: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
-      97: "",
+      97: "0xaB1a4d4f1D656d2450692D237fdD6C7f9146e814",
     },
     decimals: 18,
     projectLink: "https://www.centre.io/usdc",
@@ -1441,15 +1441,6 @@ const tokens = {
     },
     decimals: 18,
     projectLink: "https://venus.io/",
-  },
-  tusd: {
-    symbol: "TUSD",
-    address: {
-      56: "0x14016E85a25aeb13065688cAFB43044C2ef86784",
-      97: "",
-    },
-    decimals: 18,
-    projectLink: "https://www.trueusd.com/",
   },
   mtrg: {
     symbol: "MTRG",

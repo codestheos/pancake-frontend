@@ -6,13 +6,14 @@ import { ToggleTheme } from "../components/Toggle/theme";
 import { TooltipTheme } from "../components/Tooltip/types";
 import { NavThemeType } from "../widgets/Menu/theme";
 import { ModalTheme } from "../widgets/Modal/types";
-import { Breakpoints, Colors, MediaQueries, Radii, Shadows, Spacing, ZIndices } from "./types";
+import { Breakpoints, MediaQueries, ZIndices } from "./types";
+import { vars } from "../css/vars.css";
 
 export interface PancakeTheme {
   siteWidth: number;
   isDark: boolean;
   alert: AlertTheme;
-  colors: Colors;
+  colors: typeof vars.colors;
   card: CardTheme;
   nav: NavThemeType;
   modal: ModalTheme;
@@ -22,13 +23,12 @@ export interface PancakeTheme {
   tooltip: TooltipTheme;
   breakpoints: Breakpoints;
   mediaQueries: MediaQueries;
-  spacing: Spacing;
-  shadows: Shadows;
-  radii: Radii;
+  spacing: typeof vars.space;
+  shadows: typeof vars.shadows;
+  radii: typeof vars.radii;
   zIndices: ZIndices;
 }
 
-export { darkColors, lightColors } from "./colors";
 export { default as dark } from "./dark";
 export { default as light } from "./light";
 export * from "./types";

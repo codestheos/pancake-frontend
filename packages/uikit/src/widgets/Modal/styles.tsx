@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import Flex from "../../components/Box/Flex";
+import React, { MouseEvent } from "react";
+import { styled } from "styled-components";
 import { MotionBox } from "../../components/Box";
+import Flex from "../../components/Box/Flex";
+import { BaseButtonProps, IconButton } from "../../components/Button";
 import { ArrowBackIcon, CloseIcon } from "../../components/Svg";
-import { IconButton } from "../../components/Button";
 import { ModalProps } from "./types";
 
 export const mobileFooterHeight = 73;
 
-export const ModalHeader = styled.div<{ background?: string }>`
+export const ModalHeader = styled(Flex)<{ background?: string; headerBorderColor?: string }>`
   align-items: center;
   background: transparent;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  border-bottom: 1px solid ${({ theme, headerBorderColor }) => headerBorderColor || theme.colors.cardBorder};
   display: flex;
   padding: 12px 24px;
 
@@ -28,6 +28,7 @@ export const ModalTitle = styled(Flex)`
 export const ModalBody = styled(Flex)`
   flex-direction: column;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: calc(90vh - ${mobileFooterHeight}px);
   ${({ theme }) => theme.mediaQueries.md} {
     display: flex;
@@ -35,12 +36,20 @@ export const ModalBody = styled(Flex)`
   }
 `;
 
-export const ModalCloseButton: React.FC<React.PropsWithChildren<{ onDismiss: ModalProps["onDismiss"] }>> = ({
-  onDismiss,
-}) => {
+export const ModalCloseButton: React.FC<
+  React.PropsWithChildren<{ onDismiss: ModalProps["onDismiss"] }> & BaseButtonProps
+> = ({ onDismiss, ...props }) => {
   return (
-    <IconButton variant="text" onClick={onDismiss} aria-label="Close the dialog">
-      <CloseIcon color="primary" />
+    <IconButton
+      variant="text"
+      onClick={(e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        onDismiss?.();
+      }}
+      aria-label="Close the dialog"
+      {...props}
+    >
+      <CloseIcon color="textSubtle" />
     </IconButton>
   );
 };
@@ -53,7 +62,9 @@ export const ModalBackButton: React.FC<React.PropsWithChildren<{ onBack: ModalPr
   );
 };
 
-export const ModalContainer = styled(MotionBox)<{ $minWidth: string }>`
+export const ModalContainer = styled(MotionBox)<{
+  $minHeight: string;
+}>`
   overflow: hidden;
   background: ${({ theme }) => theme.modal.background};
   box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.05);
@@ -63,17 +74,15 @@ export const ModalContainer = styled(MotionBox)<{ $minWidth: string }>`
   max-height: calc(var(--vh, 1vh) * 100);
   z-index: ${({ theme }) => theme.zIndices.modal};
   position: absolute;
-  min-width: ${({ $minWidth }) => $minWidth};
   bottom: 0;
   max-width: none !important;
-  min-height: 300px;
+  min-height: ${({ $minHeight }) => $minHeight};
 
   ${({ theme }) => theme.mediaQueries.md} {
     width: auto;
     position: auto;
     bottom: auto;
     border-radius: 32px;
-    max-width: 100%;
     max-height: 100vh;
   }
-`;
+` as typeof MotionBox;

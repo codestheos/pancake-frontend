@@ -10,6 +10,7 @@ node_modules
 cypress/videos
 cypress/screenshots
 cypress/fixtures/example.json
+**/packages/**/coverage
 
 # next.js
 .next/
@@ -32,16 +33,28 @@ storybook-static
 .env.production.local
 
 # debug
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 debug.log*
+**/vite.config.ts.timestamp*.mjs
 
-**/config/abi/types
+**/apps/web/config/abi/types
+**/packages/smart-router/evm/abis/types
+**/packages/pools/src/abis/types
 
+vite.config.ts.timestamp-*.mjs
 
 # Sentry
 .sentryclirc
 
 # turbo
 .turbo
+.vercel
+
+# store for local dev scripts
+scripts/dev/**
+
+# typescript
+*.tsbuildinfo

@@ -1,13 +1,13 @@
-import React from "react";
-import { renderWithProvider } from "../../testHelpers";
+import { expect, it } from "vitest";
 import Heading from "../../components/Heading/Heading";
+import { renderWithProvider } from "../../testHelpers";
 
 it("renders correctly", () => {
   const { asFragment } = renderWithProvider(<Heading>Title</Heading>);
   expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
       .c0 {
-      color: #280D5F;
+      color: var(--colors-text);
       font-weight: 600;
       line-height: 1.5;
       font-size: 16px;
@@ -19,7 +19,7 @@ it("renders correctly", () => {
       line-height: 1.1;
     }
 
-    @media screen and (min-width:968px) {
+    @media screen and (min-width: 968px) {
       .c1 {
         font-size: 20px;
       }
@@ -27,8 +27,6 @@ it("renders correctly", () => {
 
     <h2
         class="c0 c1"
-        color="text"
-        font-size="16px"
       >
         Title
       </h2>

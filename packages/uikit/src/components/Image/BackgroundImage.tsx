@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
 import observerOptions from "./options";
 import Wrapper from "./Wrapper";
 import { BackgroundImageProps } from "./types";
 import Placeholder from "./Placeholder";
 
 const StyledBackgroundImage = styled(Wrapper)`
+  display: flex;
   background-repeat: no-repeat;
   background-size: contain;
 `;

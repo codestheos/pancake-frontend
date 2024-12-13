@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createElement, memo } from "react";
-import { Flex } from "../Box";
 import isTouchDevice from "../../util/isTouchDevice";
+import { Flex } from "../Box";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import MenuItem from "../MenuItem/MenuItem";
-import { MenuItemsProps } from "./types";
+import { MenuItemsProps, MenuItemsType } from "./types";
+import { findMenuItemsStatusColor } from "../../util/findMenuItemsStatusColor";
 
 const MenuItems: React.FC<React.PropsWithChildren<MenuItemsProps>> = ({
-  items = [],
+  items = [] as MenuItemsType[],
   activeItem,
   activeSubItem,
+  activeSubItemChildItem,
   ...props
 }) => {
   return (
     <Flex {...props}>
-      {items.map(({ label, items: menuItems = [], href, icon, disabled }) => {
-        const statusColor = menuItems?.find((menuItem) => menuItem.status !== undefined)?.status?.color;
+      {items.map(({ label, items: menuItems = [], href, icon, disabled, onClick }) => {
+        const statusColor = findMenuItemsStatusColor(menuItems);
         const isActive = activeItem === href;
         const linkProps = isTouchDevice() && menuItems && menuItems.length > 0 ? {} : { href };
         const Icon = icon;
@@ -25,9 +27,16 @@ const MenuItems: React.FC<React.PropsWithChildren<MenuItemsProps>> = ({
             items={menuItems}
             py={1}
             activeItem={activeSubItem}
+            activeSubItemChildItem={activeSubItemChildItem}
             isDisabled={disabled}
           >
-            <MenuItem {...linkProps} isActive={isActive} statusColor={statusColor} isDisabled={disabled}>
+            <MenuItem
+              {...linkProps}
+              isActive={isActive}
+              statusColor={statusColor}
+              isDisabled={disabled}
+              onClick={onClick}
+            >
               {label || (icon && createElement(Icon as any, { color: isActive ? "secondary" : "textSubtle" }))}
             </MenuItem>
           </DropdownMenu>

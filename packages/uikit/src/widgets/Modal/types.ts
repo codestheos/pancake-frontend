@@ -11,10 +11,19 @@ export interface InjectedProps {
   mode?: string;
 }
 
-export interface ModalProps extends InjectedProps, Omit<BoxProps, "title"> {
+export interface ModalWrapperProps extends InjectedProps, Omit<BoxProps, "title" | "content"> {
+  hideCloseButton?: boolean;
+}
+
+export interface ModalProps extends ModalWrapperProps {
   title: React.ReactNode;
   hideCloseButton?: boolean;
   onBack?: () => void;
+  headerPadding?: string;
   bodyPadding?: string;
   headerBackground?: string;
+  headerRightSlot?: React.ReactNode;
+  bodyAlignItems?: string;
+  headerBorderColor?: string;
+  bodyTop?: string;
 }

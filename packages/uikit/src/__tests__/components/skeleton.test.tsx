@@ -1,6 +1,6 @@
-import React from "react";
-import { renderWithProvider } from "../../testHelpers";
+import { expect, it } from "vitest";
 import Skeleton from "../../components/Skeleton/Skeleton";
+import { renderWithProvider } from "../../testHelpers";
 
 it("renders correctly", () => {
   const { asFragment } = renderWithProvider(<Skeleton />);
@@ -9,16 +9,13 @@ it("renders correctly", () => {
       .c0 {
       min-height: 20px;
       display: block;
-      background-color: #E9EAEB;
-      border-radius: 4px;
+      background-color: var(--colors-backgroundDisabled);
+      border-radius: var(--radii-small);
     }
 
     .c1 {
-      -webkit-animation: wAFEO 2s infinite ease-out;
       animation: wAFEO 2s infinite ease-out;
-      -webkit-transform: translate3d(0,0,0);
-      -ms-transform: translate3d(0,0,0);
-      transform: translate3d(0,0,0);
+      transform: translate3d(0, 0, 0);
     }
 
     <div
@@ -35,24 +32,19 @@ it("renders correctly avatar", () => {
       .c0 {
       min-height: 20px;
       display: block;
-      background-color: #E9EAEB;
-      border-radius: 50%;
+      background-color: var(--colors-backgroundDisabled);
+      border-radius: var(--radii-circle);
       width: 50px;
       height: 50px;
     }
 
     .c1 {
-      -webkit-animation: wAFEO 2s infinite ease-out;
       animation: wAFEO 2s infinite ease-out;
-      -webkit-transform: translate3d(0,0,0);
-      -ms-transform: translate3d(0,0,0);
-      transform: translate3d(0,0,0);
+      transform: translate3d(0, 0, 0);
     }
 
     <div
         class="c0 c1"
-        height="50"
-        width="50"
       />
     </DocumentFragment>
   `);
@@ -65,35 +57,30 @@ it("renders correctly waves animation", () => {
       .c0 {
       min-height: 20px;
       display: block;
-      background-color: #E9EAEB;
-      border-radius: 4px;
+      background-color: var(--colors-backgroundDisabled);
+      border-radius: var(--radii-small);
       width: 50px;
       height: 50px;
     }
 
     .c1 {
       overflow: hidden;
-      -webkit-transform: translate3d(0,0,0);
-      -ms-transform: translate3d(0,0,0);
-      transform: translate3d(0,0,0);
+      transform: translate3d(0, 0, 0);
     }
 
     .c1:before {
       content: "";
       position: absolute;
-      background-image: linear-gradient(90deg,transparent,rgba(243,243,243,0.5),transparent);
+      background-image: linear-gradient(90deg, transparent, rgba(243, 243, 243, 0.5), transparent);
       top: 0;
       left: -150px;
       height: 100%;
       width: 150px;
-      -webkit-animation: kudDcV 2s cubic-bezier(0.4,0,0.2,1) infinite;
-      animation: kudDcV 2s cubic-bezier(0.4,0,0.2,1) infinite;
+      animation: kudDcV 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
 
     <div
         class="c0 c1"
-        height="50"
-        width="50"
       />
     </DocumentFragment>
   `);

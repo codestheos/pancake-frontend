@@ -6,7 +6,7 @@ import {
   ColumnType,
   TableState,
   TableAction,
-  DataType,
+  ColumnDataType,
   UseTableReturnType,
   UseTableOptionsType,
   RowType,
@@ -16,12 +16,12 @@ import {
 } from "./types";
 import { byTextAscending, byTextDescending } from "./utils";
 
-const sortByColumn = <T extends DataType>(
+const sortByColumn = <T extends ColumnDataType>(
   data: RowType<T>[],
   sortColumn: string,
   columns: ColumnStateType<T>[]
 ): RowType<T>[] => {
-  let isAscending = null;
+  let isAscending: boolean | undefined | null = null;
   let sortedRows: RowType<T>[] = [...data];
 
   columns.forEach((column) => {
@@ -43,13 +43,13 @@ const sortByColumn = <T extends DataType>(
   return sortedRows;
 };
 
-const getPaginatedData = <T extends DataType>(rows: RowType<T>[], perPage: number, page: number) => {
+const getPaginatedData = <T extends ColumnDataType>(rows: RowType<T>[], perPage: number, page: number) => {
   const start = (page - 1) * perPage;
   const end = start + perPage;
   return rows.slice(start, end);
 };
 
-const getColumnsByName = <T extends DataType>(columns: ColumnType<T>[]): ColumnByNamesType<T> => {
+const getColumnsByName = <T extends ColumnDataType>(columns: ColumnType<T>[]): ColumnByNamesType<T> => {
   const columnsByName: ColumnByNamesType<T> = {};
   columns.forEach((column) => {
     const col: ColumnType<T> = {
@@ -68,15 +68,15 @@ const getColumnsByName = <T extends DataType>(columns: ColumnType<T>[]): ColumnB
 };
 
 const createReducer =
-  <T extends DataType>() =>
+  <T extends ColumnDataType>() =>
   (state: TableState<T>, action: TableAction<T>): TableState<T> => {
-    let rows = [];
+    let rows: RowType<T>[] = [];
     let nextPage = 0;
     let prevPage = 0;
-    let isAscending = null;
+    let isAscending: any = null;
     let sortedRows: RowType<T>[] = [];
-    let columnCopy = [];
-    let filteredRows = [];
+    let columnCopy: ColumnStateType<T>[] = [];
+    let filteredRows: any[] = [];
     let selectedRowsById: { [key: number]: boolean } = {};
     let stateCopy: TableState<T> = { ...state };
     const rowIds: { [key: number]: boolean } = {};
@@ -277,7 +277,7 @@ const createReducer =
     }
   };
 
-const sortDataInOrder = <T extends DataType>(data: T[], columns: ColumnType<T>[]): T[] => {
+const sortDataInOrder = <T extends ColumnDataType>(data: T[], columns: ColumnType<T>[]): T[] => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return data.map((row: any) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -292,11 +292,11 @@ const sortDataInOrder = <T extends DataType>(data: T[], columns: ColumnType<T>[]
   });
 };
 
-export const makeRender = <T extends DataType>(
+export const makeRender = <T extends ColumnDataType>(
   // eslint-disable-next-line
   value: any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (({ value: val, row }: { value: any; row: T }) => ReactNode) | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-shadow
+  render: (({ value, row }: { value: any; row: T }) => ReactNode) | undefined,
   row: T
 ): (() => React.ReactNode) => {
   return render ? () => render({ row, value }) : () => value;
@@ -306,7 +306,7 @@ const makeHeaderRender = (label: string, render?: HeaderRenderType) => {
   return render ? () => render({ label }) : () => label;
 };
 
-export const useTable = <T extends DataType>(
+export const useTable = <T extends ColumnDataType>(
   columns: ColumnType<T>[],
   data: T[],
   options?: UseTableOptionsType<T>

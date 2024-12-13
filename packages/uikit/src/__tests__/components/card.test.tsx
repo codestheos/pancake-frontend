@@ -1,6 +1,6 @@
-import React from "react";
+import { expect, it } from "vitest";
+import { Card, CardBody, CardFooter, CardHeader } from "../../components/Card";
 import { renderWithProvider } from "../../testHelpers";
-import { Card, CardBody, CardHeader, CardFooter } from "../../components/Card";
 
 it("renders correctly", () => {
   const { asFragment } = renderWithProvider(
@@ -13,9 +13,9 @@ it("renders correctly", () => {
   expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
       .c0 {
-      background: #E7E3EB;
-      border-radius: 24px;
-      color: #280D5F;
+      background: var(--colors-cardBorder);
+      border-radius: var(--radii-card);
+      color: var(--colors-text);
       overflow: hidden;
       position: relative;
       padding: 1px 1px 3px 1px;
@@ -25,23 +25,29 @@ it("renders correctly", () => {
       width: 100%;
       height: 100%;
       overflow: inherit;
-      background: #FFFFFF;
-      border-radius: 24px;
+      background: var(--colors-backgroundAlt);
+      border-radius: var(--radii-card);
     }
 
     .c3 {
-      padding: 24px;
+      padding: 16px;
     }
 
     .c2 {
-      background: linear-gradient(111.68deg,#F2ECF2 0%,#E8F2F6 100%);
-      border-radius: 24px 24px 0 0;
+      background: var(--colors-gradientCardHeader);
+      border-radius: var(--radii-card) var(--radii-card) 0 0;
       padding: 24px;
     }
 
     .c4 {
-      border-top: 1px solid #E7E3EB;
+      border-top: 1px solid var(--colors-cardBorder);
       padding: 24px;
+    }
+
+    @media screen and (min-width: 576px) {
+      .c3 {
+        padding: 24px;
+      }
     }
 
     <div

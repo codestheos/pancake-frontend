@@ -10,6 +10,11 @@ export const variants = {
   BINANCE: "binance",
   FAILURE: "failure",
   WARNING: "warning",
+  GRADIENTBOLD: "gradientBold",
+  SUCCESS_LOW_CONTRAST: "successLowContrast",
+  FAILURE_LOW_CONTRAST: "failureLowContrast",
+  TERTIARY: "tertiary",
+  PRIMARY60: "primary60",
 } as const;
 
 export const scales = {
@@ -17,8 +22,8 @@ export const scales = {
   SM: "sm",
 } as const;
 
-export type Scale = typeof scales[keyof typeof scales];
-export type Variant = typeof variants[keyof typeof variants];
+export type Scale = (typeof scales)[keyof typeof scales];
+export type Variant = (typeof variants)[keyof typeof variants];
 
 export interface TagProps extends SpaceProps, TypographyProps {
   variant?: Variant;

@@ -1,4 +1,4 @@
-import { Language } from '@pancakeswap/uikit'
+import { Language } from '../types'
 
 export const AR: Language = { locale: 'ar-SA', language: 'العربية', code: 'ar' }
 export const BN: Language = { locale: 'bn-BD', language: 'বাংলা', code: 'bn' }
@@ -29,7 +29,7 @@ export const VI: Language = { locale: 'vi-VN', language: 'Tiếng Việt', code:
 export const ZHCN: Language = { locale: 'zh-CN', language: '简体中文', code: 'zh-cn' }
 export const ZHTW: Language = { locale: 'zh-TW', language: '繁體中文', code: 'zh-tw' }
 
-export const languages = {
+export const languages: Record<string, Language> = {
   'ar-SA': AR,
   'bn-BD': BN,
   'en-US': EN,

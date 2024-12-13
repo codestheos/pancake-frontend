@@ -1,5 +1,5 @@
 import { ElementType, ReactNode } from "react";
-import { LayoutProps, SpaceProps } from "styled-system";
+import { LayoutProps, ResponsiveValue, SpaceProps } from "styled-system";
 import type { PolymorphicComponentProps } from "../../util/polymorphic";
 
 export const scales = {
@@ -17,16 +17,17 @@ export const variants = {
   SUBTLE: "subtle",
   SUCCESS: "success",
   LIGHT: "light",
+  BUBBLEGUM: "bubblegum",
 } as const;
 
-export type Scale = typeof scales[keyof typeof scales];
-export type Variant = typeof variants[keyof typeof variants];
+export type Scale = (typeof scales)[keyof typeof scales];
+export type Variant = (typeof variants)[keyof typeof variants];
 
 export interface BaseButtonProps extends LayoutProps, SpaceProps {
   as?: "a" | "button" | ElementType;
   external?: boolean;
   isLoading?: boolean;
-  scale?: Scale;
+  scale?: ResponsiveValue<Scale>;
   variant?: Variant;
   disabled?: boolean;
   startIcon?: ReactNode;

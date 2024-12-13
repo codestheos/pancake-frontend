@@ -7,11 +7,12 @@ export interface ButtonMenuItemProps extends BaseButtonProps {
 }
 
 export interface ButtonMenuProps extends SpaceProps {
-  variant?: typeof variants.PRIMARY | typeof variants.SUBTLE;
+  variant?: typeof variants.PRIMARY | typeof variants.SUBTLE | typeof variants.LIGHT | typeof variants.TEXT;
   activeIndex?: number;
-  onItemClick?: (index: number) => void;
+  onItemClick?: (index: number, event: React.MouseEvent<HTMLElement>) => void;
   scale?: Scale;
   disabled?: boolean;
   children: ReactElement[];
   fullWidth?: boolean;
+  noButtonMargin?: boolean;
 }

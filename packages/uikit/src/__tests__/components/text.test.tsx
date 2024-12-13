@@ -1,13 +1,13 @@
-import React from "react";
-import { renderWithProvider } from "../../testHelpers";
+import { expect, it } from "vitest";
 import Text from "../../components/Text/Text";
+import { renderWithProvider } from "../../testHelpers";
 
 it("renders correctly", () => {
   const { asFragment } = renderWithProvider(<Text>pancake</Text>);
   expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
       .c0 {
-      color: #280D5F;
+      color: var(--colors-text);
       font-weight: 400;
       line-height: 1.5;
       font-size: 16px;
@@ -15,8 +15,6 @@ it("renders correctly", () => {
 
     <div
         class="c0"
-        color="text"
-        font-size="16px"
       >
         pancake
       </div>

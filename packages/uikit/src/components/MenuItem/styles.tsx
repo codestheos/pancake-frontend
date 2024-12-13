@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { StyledMenuItemProps } from "./types";
 
 export const StyledMenuItemContainer = styled.div<StyledMenuItemProps>`
@@ -29,6 +29,7 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
   font-size: 16px;
   font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.5 : 1)};
+  pointer-events: ${({ $isDisabled }) => ($isDisabled ? "none" : "inherit")};
 
   ${({ $statusColor, theme }) =>
     $statusColor &&
@@ -50,7 +51,9 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
     height: 48px;
   `
       : `
-    padding: 4px 4px 0px 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+
     height: 42px;
   `}
 

@@ -1,22 +1,21 @@
-import React from "react";
-import { renderWithProvider } from "../../testHelpers";
+import { expect, it, vi } from "vitest";
 import Toggle from "../../components/Toggle/Toggle";
+import { renderWithProvider } from "../../testHelpers";
 
-const handleChange = jest.fn();
+const handleChange = vi.fn();
 
 it("renders correctly", () => {
   const { asFragment } = renderWithProvider(<Toggle checked onChange={handleChange} scale="md" />);
   expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
       .c3 {
-      background-color: #FFFFFF;
+      background-color: var(--colors-backgroundAlt);
       border-radius: 50%;
       cursor: pointer;
       height: 26px;
       left: 3px;
       position: absolute;
       top: 3px;
-      -webkit-transition: left 200ms ease-in;
       transition: left 200ms ease-in;
       width: 26px;
       z-index: 1;
@@ -31,34 +30,27 @@ it("renders correctly", () => {
       z-index: 3;
     }
 
-    .c1:checked + .c2 {
+    .c1:checked+.c2 {
       left: calc(100% - 30px);
     }
 
-    .c1:focus + .c2 {
-      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);
+    .c1:focus+.c2 {
+      box-shadow: var(--shadows-focus);
     }
 
-    .c1:hover + .c2:not(:disabled):not(:checked) {
-      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);
+    .c1:hover+.c2:not(:disabled):not(:checked) {
+      box-shadow: var(--shadows-focus);
     }
 
     .c0 {
-      -webkit-align-items: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
       align-items: center;
-      background-color: #31D0AA;
+      background-color: var(--colors-success);
       border-radius: 24px;
-      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);
+      box-shadow: var(--shadows-inset);
       cursor: pointer;
-      display: -webkit-inline-box;
-      display: -webkit-inline-flex;
-      display: -ms-inline-flexbox;
       display: inline-flex;
       height: 32px;
       position: relative;
-      -webkit-transition: background-color 200ms;
       transition: background-color 200ms;
       width: 56px;
     }
@@ -68,7 +60,6 @@ it("renders correctly", () => {
         scale="md"
       >
         <input
-          checked=""
           class="c1"
           scale="md"
           type="checkbox"
@@ -87,14 +78,13 @@ it("renders correctly scale sm", () => {
   expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
       .c3 {
-      background-color: #FFFFFF;
+      background-color: var(--colors-backgroundAlt);
       border-radius: 50%;
       cursor: pointer;
       height: 16px;
       left: 2px;
       position: absolute;
       top: 2px;
-      -webkit-transition: left 200ms ease-in;
       transition: left 200ms ease-in;
       width: 16px;
       z-index: 1;
@@ -109,34 +99,27 @@ it("renders correctly scale sm", () => {
       z-index: 3;
     }
 
-    .c1:checked + .c2 {
+    .c1:checked+.c2 {
       left: calc(100% - 18px);
     }
 
-    .c1:focus + .c2 {
-      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);
+    .c1:focus+.c2 {
+      box-shadow: var(--shadows-focus);
     }
 
-    .c1:hover + .c2:not(:disabled):not(:checked) {
-      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);
+    .c1:hover+.c2:not(:disabled):not(:checked) {
+      box-shadow: var(--shadows-focus);
     }
 
     .c0 {
-      -webkit-align-items: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
       align-items: center;
-      background-color: #31D0AA;
+      background-color: var(--colors-success);
       border-radius: 24px;
-      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);
+      box-shadow: var(--shadows-inset);
       cursor: pointer;
-      display: -webkit-inline-box;
-      display: -webkit-inline-flex;
-      display: -ms-inline-flexbox;
       display: inline-flex;
       height: 20px;
       position: relative;
-      -webkit-transition: background-color 200ms;
       transition: background-color 200ms;
       width: 36px;
     }
@@ -146,7 +129,6 @@ it("renders correctly scale sm", () => {
         scale="sm"
       >
         <input
-          checked=""
           class="c1"
           scale="sm"
           type="checkbox"

@@ -1,5 +1,5 @@
-import React, { cloneElement, Children, ReactElement } from "react";
-import styled, { DefaultTheme } from "styled-components";
+import React, { Children, cloneElement, ReactElement } from "react";
+import { DefaultTheme, styled } from "styled-components";
 import { space } from "styled-system";
 import { scales, variants } from "../Button/types";
 import { ButtonMenuProps } from "./types";
@@ -16,13 +16,22 @@ const getBorderColor = ({ theme, variant }: StyledButtonMenuProps) => {
   return theme.colors[variant === variants.SUBTLE ? "inputSecondary" : "disabled"];
 };
 
-const StyledButtonMenu = styled.div<StyledButtonMenuProps>`
-  background-color: ${getBackgroundColor};
+const StyledButtonMenu = styled.div.withConfig({
+  shouldForwardProp: (props) => !["fullWidth"].includes(props),
+})<StyledButtonMenuProps>`
+  ${(props) => {
+    if (props.variant === variants.TEXT) {
+      return "";
+    }
+    return `
+    background-color: ${getBackgroundColor(props)};
+    border: 1px solid ${getBorderColor(props)};
+    `;
+  }}
   border-radius: 16px;
   display: ${({ fullWidth }) => (fullWidth ? "flex" : "inline-flex")};
-  border: 1px solid ${getBorderColor};
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
-
+  align-items: center;
   & > button,
   & > a {
     flex: ${({ fullWidth }) => (fullWidth ? 1 : "auto")};
@@ -30,7 +39,7 @@ const StyledButtonMenu = styled.div<StyledButtonMenuProps>`
 
   & > button + button,
   & > a + a {
-    margin-left: 2px; // To avoid focus shadow overlap
+    margin-left: ${({ noButtonMargin }) => (noButtonMargin ? "0px" : "2px")}; // To avoid focus shadow overlap
   }
 
   & > button,
@@ -44,7 +53,6 @@ const StyledButtonMenu = styled.div<StyledButtonMenuProps>`
         opacity: 0.5;
 
         & > button:disabled {
-          background-color: transparent;
           color: ${variant === variants.PRIMARY ? theme.colors.primary : theme.colors.textSubtle};
         }
     `;
@@ -69,7 +77,7 @@ const ButtonMenu: React.FC<React.PropsWithChildren<ButtonMenuProps>> = ({
       {Children.map(children, (child: ReactElement, index) => {
         return cloneElement(child, {
           isActive: activeIndex === index,
-          onClick: onItemClick ? () => onItemClick(index) : undefined,
+          onClick: onItemClick ? (e: React.MouseEvent<HTMLElement>) => onItemClick(index, e) : undefined,
           scale,
           variant,
           disabled,

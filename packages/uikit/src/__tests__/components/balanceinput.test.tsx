@@ -1,8 +1,8 @@
-import React from "react";
-import { renderWithProvider } from "../../testHelpers";
+import { expect, it, vi } from "vitest";
 import BalanceInput from "../../components/BalanceInput/BalanceInput";
+import { renderWithProvider } from "../../testHelpers";
 
-const handleChange = jest.fn();
+const handleChange = vi.fn();
 
 it("renders correctly", () => {
   const { asFragment } = renderWithProvider(
@@ -10,87 +10,70 @@ it("renders correctly", () => {
   );
   expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
-      .c1 {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
+      .c2 {
+      width: 100%;
+    }
+
+    .c1 {
       display: flex;
-      -webkit-box-pack: end;
-      -webkit-justify-content: flex-end;
-      -ms-flex-pack: end;
       justify-content: flex-end;
     }
 
-    .c2 {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
+    .c3 {
       display: flex;
-      -webkit-align-items: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
+    }
+
+    .c4 {
+      display: flex;
       align-items: center;
     }
 
-    .c5 {
-      color: #7A6EAA;
+    .c7 {
+      color: var(--colors-textSubtle);
       font-weight: 400;
       line-height: 1.5;
       font-size: 12px;
       text-align: right;
     }
 
-    .c3 {
-      background-color: #eeeaf4;
-      border: 0;
+    .c5 {
+      background-color: var(--colors-input);
       border-radius: 16px;
-      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);
-      color: #280D5F;
+      box-shadow: var(--shadows-inset);
+      color: var(--colors-text);
       display: block;
       font-size: 16px;
       height: 40px;
       outline: 0;
       padding: 0 16px;
       width: 100%;
-      border: 1px solid #d7caec;
+      border: 1px solid var(--colors-inputSecondary);
     }
 
-    .c3::-webkit-input-placeholder {
-      color: #7A6EAA;
+    .c5::placeholder {
+      color: var(--colors-textSubtle);
     }
 
-    .c3::-moz-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3:-ms-input-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3::placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3:disabled {
-      background-color: #E9EAEB;
+    .c5:disabled {
+      background-color: var(--colors-backgroundDisabled);
       box-shadow: none;
-      color: #BDC2C4;
+      color: var(--colors-textDisabled);
       cursor: not-allowed;
     }
 
-    .c3:focus:not(:disabled) {
-      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);
+    .c5:focus:not(:disabled) {
+      box-shadow: var(--shadows-focus);
     }
 
     .c0 {
-      background-color: #eeeaf4;
-      border: 1px solid #d7caec;
+      background-color: var(--colors-input);
+      border: 1px solid var(--colors-inputSecondary);
       border-radius: 16px;
-      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);
+      box-shadow: var(--shadows-inset);
       padding: 8px 16px;
     }
 
-    .c4 {
+    .c6 {
       background: transparent;
       border-radius: 0;
       box-shadow: none;
@@ -100,23 +83,11 @@ it("renders correctly", () => {
       border: none;
     }
 
-    .c4::-webkit-input-placeholder {
-      color: #7A6EAA;
+    .c6 ::placeholder {
+      color: var(--colors-textSubtle);
     }
 
-    .c4::-moz-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4:-ms-input-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4::placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4:focus:not(:disabled) {
+    .c6:focus:not(:disabled) {
       box-shadow: none;
     }
 
@@ -127,27 +98,28 @@ it("renders correctly", () => {
           class="c1"
         >
           <div
-            class=""
+            class="c2 c3"
           >
             <div
               class="c2"
             >
-              <input
-                class="c3 c4"
-                inputmode="decimal"
-                min="0"
-                pattern="^[0-9]*[.,]?[0-9]{0,18}$"
-                placeholder="0.0"
-                scale="md"
-                value="14"
-              />
-            </div>
-            <div
-              class="c5"
-              color="textSubtle"
-              font-size="12px"
-            >
-              15 USD
+              <div
+                class="c4"
+              >
+                <input
+                  class="c5 c6"
+                  inputmode="decimal"
+                  min="0"
+                  pattern="^[0-9]*[.,]?[0-9]{0,18}$"
+                  placeholder="0.0"
+                  value="14"
+                />
+              </div>
+              <div
+                class="c7"
+              >
+                15 USD
+              </div>
             </div>
           </div>
         </div>
@@ -162,101 +134,84 @@ it("renders correctly with unit prop", () => {
   );
   expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
-      .c1 {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
+      .c2 {
+      width: 100%;
+    }
+
+    .c1 {
       display: flex;
-      -webkit-box-pack: end;
-      -webkit-justify-content: flex-end;
-      -ms-flex-pack: end;
       justify-content: flex-end;
     }
 
-    .c2 {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
+    .c3 {
       display: flex;
-      -webkit-align-items: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
+    }
+
+    .c4 {
+      display: flex;
       align-items: center;
     }
 
-    .c5 {
-      color: #280D5F;
+    .c7 {
+      color: var(--colors-text);
       font-weight: 400;
       line-height: 1.5;
       font-size: 16px;
     }
 
-    .c7 {
-      color: #7A6EAA;
+    .c9 {
+      color: var(--colors-textSubtle);
       font-weight: 400;
       line-height: 1.5;
       font-size: 12px;
       text-align: right;
     }
 
-    .c3 {
-      background-color: #eeeaf4;
-      border: 0;
+    .c5 {
+      background-color: var(--colors-input);
       border-radius: 16px;
-      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);
-      color: #280D5F;
+      box-shadow: var(--shadows-inset);
+      color: var(--colors-text);
       display: block;
       font-size: 16px;
       height: 40px;
       outline: 0;
       padding: 0 16px;
       width: 100%;
-      border: 1px solid #d7caec;
+      border: 1px solid var(--colors-inputSecondary);
     }
 
-    .c3::-webkit-input-placeholder {
-      color: #7A6EAA;
+    .c5::placeholder {
+      color: var(--colors-textSubtle);
     }
 
-    .c3::-moz-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3:-ms-input-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3::placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3:disabled {
-      background-color: #E9EAEB;
+    .c5:disabled {
+      background-color: var(--colors-backgroundDisabled);
       box-shadow: none;
-      color: #BDC2C4;
+      color: var(--colors-textDisabled);
       cursor: not-allowed;
     }
 
-    .c3:focus:not(:disabled) {
-      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);
+    .c5:focus:not(:disabled) {
+      box-shadow: var(--shadows-focus);
     }
 
-    .c6 {
+    .c8 {
       margin-left: 4px;
       text-align: right;
-      color: #7A6EAA;
+      color: var(--colors-textSubtle);
       white-space: nowrap;
     }
 
     .c0 {
-      background-color: #eeeaf4;
-      border: 1px solid #d7caec;
+      background-color: var(--colors-input);
+      border: 1px solid var(--colors-inputSecondary);
       border-radius: 16px;
-      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);
+      box-shadow: var(--shadows-inset);
       padding: 8px 16px;
     }
 
-    .c4 {
+    .c6 {
       background: transparent;
       border-radius: 0;
       box-shadow: none;
@@ -266,23 +221,11 @@ it("renders correctly with unit prop", () => {
       border: none;
     }
 
-    .c4::-webkit-input-placeholder {
-      color: #7A6EAA;
+    .c6 ::placeholder {
+      color: var(--colors-textSubtle);
     }
 
-    .c4::-moz-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4:-ms-input-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4::placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4:focus:not(:disabled) {
+    .c6:focus:not(:disabled) {
       box-shadow: none;
     }
 
@@ -293,34 +236,33 @@ it("renders correctly with unit prop", () => {
           class="c1"
         >
           <div
-            class=""
+            class="c2 c3"
           >
             <div
               class="c2"
             >
-              <input
-                class="c3 c4"
-                inputmode="decimal"
-                min="0"
-                pattern="^[0-9]*[.,]?[0-9]{0,18}$"
-                placeholder="0.0"
-                scale="md"
-                value="14"
-              />
               <div
-                class="c5 c6"
-                color="text"
-                font-size="16px"
+                class="c4"
               >
-                CAKE
+                <input
+                  class="c5 c6"
+                  inputmode="decimal"
+                  min="0"
+                  pattern="^[0-9]*[.,]?[0-9]{0,18}$"
+                  placeholder="0.0"
+                  value="14"
+                />
+                <div
+                  class="c7 c8"
+                >
+                  CAKE
+                </div>
               </div>
-            </div>
-            <div
-              class="c7"
-              color="textSubtle"
-              font-size="12px"
-            >
-              15 USD
+              <div
+                class="c9"
+              >
+                15 USD
+              </div>
             </div>
           </div>
         </div>
@@ -335,188 +277,154 @@ it("renders correctly with unit prop and switchEditingUnits", () => {
       value="14"
       currencyValue="15 USD"
       unit="CAKE"
-      switchEditingUnits={jest.fn()}
+      switchEditingUnits={vi.fn()}
       onUserInput={handleChange}
     />
   );
   expect(asFragment()).toMatchInlineSnapshot(`
     <DocumentFragment>
-      .c8 {
+      .c2 {
+      width: 100%;
+    }
+
+    .c10 {
       padding-left: 12px;
     }
 
     .c1 {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
       display: flex;
-      -webkit-box-pack: end;
-      -webkit-justify-content: flex-end;
-      -ms-flex-pack: end;
       justify-content: flex-end;
     }
 
-    .c2 {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
+    .c3 {
       display: flex;
-      -webkit-align-items: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
+    }
+
+    .c4 {
+      display: flex;
       align-items: center;
     }
 
-    .c12 {
-      -webkit-align-self: center;
-      -ms-flex-item-align: center;
+    .c14 {
       align-self: center;
-      fill: #7A6EAA;
-      -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
+      fill: var(--colors-textSubtle);
+      color: var(--colors-textSubtle);
       flex-shrink: 0;
     }
 
-    .c5 {
-      color: #280D5F;
+    .c7 {
+      color: var(--colors-text);
       font-weight: 400;
       line-height: 1.5;
       font-size: 16px;
     }
 
-    .c7 {
-      color: #7A6EAA;
+    .c9 {
+      color: var(--colors-textSubtle);
       font-weight: 400;
       line-height: 1.5;
       font-size: 12px;
       text-align: right;
     }
 
-    .c3 {
-      background-color: #eeeaf4;
-      border: 0;
+    .c5 {
+      background-color: var(--colors-input);
       border-radius: 16px;
-      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);
-      color: #280D5F;
+      box-shadow: var(--shadows-inset);
+      color: var(--colors-text);
       display: block;
       font-size: 16px;
       height: 40px;
       outline: 0;
       padding: 0 16px;
       width: 100%;
-      border: 1px solid #d7caec;
+      border: 1px solid var(--colors-inputSecondary);
     }
 
-    .c3::-webkit-input-placeholder {
-      color: #7A6EAA;
+    .c5::placeholder {
+      color: var(--colors-textSubtle);
     }
 
-    .c3::-moz-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3:-ms-input-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3::placeholder {
-      color: #7A6EAA;
-    }
-
-    .c3:disabled {
-      background-color: #E9EAEB;
+    .c5:disabled {
+      background-color: var(--colors-backgroundDisabled);
       box-shadow: none;
-      color: #BDC2C4;
+      color: var(--colors-textDisabled);
       cursor: not-allowed;
     }
 
-    .c3:focus:not(:disabled) {
-      box-shadow: 0px 0px 0px 1px #7645D9,0px 0px 0px 4px rgba(118,69,217,0.6);
+    .c5:focus:not(:disabled) {
+      box-shadow: var(--shadows-focus);
     }
 
-    .c9 {
+    .c11 {
       position: relative;
-      -webkit-align-items: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
       align-items: center;
       border: 0;
       border-radius: 16px;
-      box-shadow: 0px -1px 0px 0px rgba(14,14,44,0.4) inset;
+      box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;
       cursor: pointer;
-      display: -webkit-inline-box;
-      display: -webkit-inline-flex;
-      display: -ms-inline-flexbox;
       display: inline-flex;
       font-family: inherit;
       font-size: 16px;
       font-weight: 600;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -ms-flex-pack: center;
       justify-content: center;
-      -webkit-letter-spacing: 0.03em;
-      -moz-letter-spacing: 0.03em;
-      -ms-letter-spacing: 0.03em;
       letter-spacing: 0.03em;
       line-height: 1;
       opacity: 1;
       outline: 0;
-      -webkit-transition: background-color 0.2s,opacity 0.2s;
       transition: background-color 0.2s,opacity 0.2s;
       height: 32px;
       padding: 0 16px;
       background-color: transparent;
-      color: #1FC7D4;
+      color: var(--colors-primary);
       box-shadow: none;
     }
 
-    .c9:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {
-      opacity: 0.65;
+    .c11:focus-visible {
+      outline: none;
+      box-shadow: var(--shadows-focus);
     }
 
-    .c9:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {
+    .c11:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {
       opacity: 0.85;
-      -webkit-transform: translateY(1px);
-      -ms-transform: translateY(1px);
       transform: translateY(1px);
       box-shadow: none;
     }
 
-    .c9:disabled,
-    .c9.pancake-button--disabled {
-      background-color: #E9EAEB;
-      border-color: #E9EAEB;
+    .c11:disabled,
+    .c11.pancake-button--disabled {
+      background-color: var(--colors-backgroundDisabled);
+      border-color: var(--colors-backgroundDisabled);
       box-shadow: none;
-      color: #BDC2C4;
+      color: var(--colors-textDisabled);
       cursor: not-allowed;
     }
 
-    .c10 {
-      padding: 0;
+    .c12 {
+      padding: 2px;
       width: 32px;
     }
 
-    .c11 {
+    .c13 {
       width: 16px;
     }
 
-    .c6 {
+    .c8 {
       margin-left: 4px;
       text-align: right;
-      color: #7A6EAA;
+      color: var(--colors-textSubtle);
       white-space: nowrap;
     }
 
     .c0 {
-      background-color: #eeeaf4;
-      border: 1px solid #d7caec;
+      background-color: var(--colors-input);
+      border: 1px solid var(--colors-inputSecondary);
       border-radius: 16px;
-      box-shadow: inset 0px 2px 2px -1px rgba(74,74,104,0.1);
+      box-shadow: var(--shadows-inset);
       padding: 8px 16px;
     }
 
-    .c4 {
+    .c6 {
       background: transparent;
       border-radius: 0;
       box-shadow: none;
@@ -526,30 +434,23 @@ it("renders correctly with unit prop and switchEditingUnits", () => {
       border: none;
     }
 
-    .c4::-webkit-input-placeholder {
-      color: #7A6EAA;
+    .c6 ::placeholder {
+      color: var(--colors-textSubtle);
     }
 
-    .c4::-moz-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4:-ms-input-placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4::placeholder {
-      color: #7A6EAA;
-    }
-
-    .c4:focus:not(:disabled) {
+    .c6:focus:not(:disabled) {
       box-shadow: none;
     }
 
-    @supports (-webkit-text-size-adjust:none) and (not (-ms-accelerator:true)) and (not (-moz-appearance:none)) {
-      .c12 {
-        -webkit-filter: none !important;
-        filter: none !important;
+    @supports (-webkit-text-size-adjust: none) and (not (-ms-accelerator: true)) and (not (-moz-appearance: none)) {
+      .c14 {
+        filter: none!important;
+      }
+    }
+
+    @media (hover: hover) {
+      .c11:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {
+        opacity: 0.65;
       }
     }
 
@@ -560,45 +461,45 @@ it("renders correctly with unit prop and switchEditingUnits", () => {
           class="c1"
         >
           <div
-            class=""
+            class="c2 c3"
           >
             <div
               class="c2"
             >
-              <input
-                class="c3 c4"
-                inputmode="decimal"
-                min="0"
-                pattern="^[0-9]*[.,]?[0-9]{0,18}$"
-                placeholder="0.0"
-                scale="md"
-                value="14"
-              />
               <div
-                class="c5 c6"
-                color="text"
-                font-size="16px"
+                class="c4"
               >
-                CAKE
+                <input
+                  class="c5 c6"
+                  inputmode="decimal"
+                  min="0"
+                  pattern="^[0-9]*[.,]?[0-9]{0,18}$"
+                  placeholder="0.0"
+                  value="14"
+                />
+                <div
+                  class="c7 c8"
+                >
+                  CAKE
+                </div>
               </div>
-            </div>
-            <div
-              class="c7"
-              color="textSubtle"
-              font-size="12px"
-            >
-              15 USD
+              <div
+                class="c9"
+              >
+                15 USD
+              </div>
             </div>
           </div>
           <div
-            class="c8 c2"
+            class="c10 c4"
           >
             <button
-              class="c9 c10 c11"
+              class="c11 c12 c13"
               scale="sm"
+              variant="text"
             >
               <svg
-                class="c12"
+                class="c14"
                 color="textSubtle"
                 viewBox="0 0 24 25"
                 width="20px"

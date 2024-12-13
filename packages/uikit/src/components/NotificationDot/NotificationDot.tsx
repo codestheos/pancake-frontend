@@ -1,13 +1,16 @@
 import React, { cloneElement, Children, ReactElement } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { NotificationDotProps, DotProps } from "./types";
 
 const NotificationDotRoot = styled.span`
   display: inline-flex;
+  width: fit-content;
   position: relative;
 `;
 
-const Dot = styled.span<DotProps>`
+const Dot = styled("span").withConfig({
+  shouldForwardProp: (props) => !["show"].includes(props),
+})<DotProps>`
   display: ${({ show }) => (show ? "inline-flex" : "none")};
   position: absolute;
   top: 0;

@@ -1,19 +1,9 @@
-import styled, { DefaultTheme, keyframes, css } from "styled-components";
+import shouldForwardProp from "@styled-system/should-forward-prop";
+import { styled, css, DefaultTheme } from "styled-components";
 import { space } from "styled-system";
+import { promotedGradient } from "../../util/animationToolkit";
 import { Box } from "../Box";
 import { CardProps } from "./types";
-
-const PromotedGradient = keyframes`
-  0% {
-    background-position: 50% 0%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 50% 0%;
-  }
-`;
 
 interface StyledCardProps extends CardProps {
   theme: DefaultTheme;
@@ -41,7 +31,9 @@ const getBorderColor = ({ isActive, isSuccess, isWarning, borderBackground, them
   return theme.colors.cardBorder;
 };
 
-export const StyledCard = styled.div<StyledCardProps>`
+export const StyledCard = styled.div.withConfig({
+  shouldForwardProp,
+})<StyledCardProps>`
   background: ${getBorderColor};
   border-radius: ${({ theme }) => theme.radii.card};
   color: ${({ theme, isDisabled }) => theme.colors[isDisabled ? "textDisabled" : "text"]};
@@ -51,7 +43,7 @@ export const StyledCard = styled.div<StyledCardProps>`
   ${({ isActive }) =>
     isActive &&
     css`
-      animation: ${PromotedGradient} 3s ease infinite;
+      animation: ${promotedGradient} 3s ease infinite;
       background-size: 400% 400%;
     `}
 

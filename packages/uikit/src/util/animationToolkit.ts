@@ -11,7 +11,7 @@ export const disappearAnimation = keyframes`
   to { opacity:0 }
 `;
 
-export const animationHandler = (element: HTMLDivElement | null) => {
+export const animationHandler = (element: HTMLElement | null, shouldDisappear?: boolean) => {
   if (!element) return;
   if (element.classList.contains("appear")) {
     element.classList.remove("appear");
@@ -19,6 +19,10 @@ export const animationHandler = (element: HTMLDivElement | null) => {
   } else {
     element.classList.remove("disappear");
     element.classList.add("appear");
+  }
+  if (shouldDisappear) {
+    element.classList.remove("appear");
+    element.classList.add("disappear");
   }
 };
 
@@ -33,3 +37,15 @@ export const animationMap = {
   animate: "animate",
   exit: "exit",
 };
+
+export const promotedGradient = keyframes`
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+`;

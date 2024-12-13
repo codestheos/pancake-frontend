@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components";
+import { styled, DefaultTheme } from "styled-components";
 import { Colors } from "../../theme";
 import { Text } from "../Text";
 import { StyledDropdownMenuItemProps } from "./types";
@@ -14,7 +14,9 @@ const getTextColor = ({
   return theme.colors.textSubtle;
 };
 
-export const DropdownMenuItem = styled.button<StyledDropdownMenuItemProps & { $isActive: boolean }>`
+export const DropdownMenuItem = styled("button").withConfig({
+  shouldForwardProp: (props) => !["confirmModalId"].includes(props),
+})<StyledDropdownMenuItemProps & { $isActive: boolean }>`
   align-items: center;
   border: 0;
   background: transparent;
@@ -29,6 +31,7 @@ export const DropdownMenuItem = styled.button<StyledDropdownMenuItemProps & { $i
   padding-left: 16px;
   padding-right: 16px;
   width: 100%;
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "inherit")};
 
   &:is(button) {
     cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
@@ -45,12 +48,12 @@ export const DropdownMenuItem = styled.button<StyledDropdownMenuItemProps & { $i
 `;
 
 export const StyledDropdownMenuItemContainer = styled.div`
-  &:first-child > ${DropdownMenuItem} {
+  &:first-child ${DropdownMenuItem} {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
   }
 
-  &:last-child > ${DropdownMenuItem} {
+  &:last-child ${DropdownMenuItem} {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }
